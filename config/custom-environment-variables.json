@@ -1,0 +1,8 @@
+{
+    "telegram": {
+        "token": "TELEGRAM_BOT_TOKEN"
+    },
+    "refreshPeriod": "REFRESH_PERIOD",
+    "db": "LOCAL_DB_FILE",
+    "loglevel": "LOG_LEVEL"
+}

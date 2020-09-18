@@ -1,0 +1,8 @@
+{
+    "telegram": {
+        "token": ""
+    },
+    "db": "db.json",
+    "refreshPeriod": "5",
+    "loglevel": "debug"
+}

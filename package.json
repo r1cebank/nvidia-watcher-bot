@@ -1,0 +1,30 @@
+{
+  "name": "nvidia-watcher-bot",
+  "version": "1.0.0",
+  "description": "Nvidia store stock watcher bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r1cebank/nvidia-watcher-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/r1cebank/nvidia-watcher-bot/issues"
+  },
+  "homepage": "https://github.com/r1cebank/nvidia-watcher-bot#readme",
+  "dependencies": {
+    "config": "^3.3.1",
+    "interval-promise": "^1.4.0",
+    "lowdb": "^1.0.0",
+    "pino": "^6.6.1",
+    "pino-pretty": "^4.2.1",
+    "puppeteer": "^5.3.0",
+    "telegraf": "^3.38.0"
+  }
+}
