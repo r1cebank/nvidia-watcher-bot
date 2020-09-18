@@ -37,7 +37,8 @@ bot.start((ctx) => {
             .push({ id: currentUser })
             .write();
     }
-    ctx.reply('Welcome to Nvidia Store watcher bot, if you are using this for scalping, FUCK YOU');
+    ctx.reply('Welcome to Nvidia Store watcher bot, if you are using this for scalping, FUCK YOU 🖕');
+    ctx.reply('Just wait for the in stock information here, I am checking the store every 5 seconds.');
 })
 bot.on('sticker', (ctx) => ctx.reply('👍'))
 bot.hears('scalpers', (ctx) => ctx.reply('Fuck scalpers'))
@@ -45,7 +46,7 @@ bot.launch();
 
 interval(async () => {
     logger.info(`refreshing ${stockUrl}`);
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.setViewport({
         width: 1920,
