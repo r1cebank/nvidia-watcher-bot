@@ -54,7 +54,7 @@ bot.command('checkstat', (ctx) => {
 bot.hears('scalpers', (ctx) => ctx.reply('Fuck scalpers'));
 bot.launch();
 
-interval(async () => {
+async function checkSite() {
     logger.info(`refreshing ${stockUrl}`);
     const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
@@ -102,4 +102,12 @@ interval(async () => {
     }
 
     await browser.close();
+}
+
+interval(async () => {
+    try {
+        await checkSite();
+    } catch (error) {
+        logger.error('Error occurred when checkint site'.error);
+    }
 }, parseInt(config.get('refreshPeriod')) * 1000)
