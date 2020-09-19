@@ -21,6 +21,9 @@ const ignoreValues = ['OUT OF STOCK'];
 const adapter = new FileSync(config.get('db'));
 const db = low(adapter);
 
+let lastCheck = new Date();
+let totalChecks = 0;
+
 db.defaults({ users: [] })
     .write();
 
@@ -40,8 +43,15 @@ bot.start((ctx) => {
     ctx.reply('Welcome to Nvidia Store watcher bot, if you are using this for scalping, FUCK YOU 🖕');
     ctx.reply('Just wait for the in stock information here, I am checking the store every 5 seconds.');
 })
-bot.on('sticker', (ctx) => ctx.reply('👍'))
-bot.hears('scalpers', (ctx) => ctx.reply('Fuck scalpers'))
+bot.on('sticker', (ctx) => ctx.reply('👍'));
+bot.command('lastcheck', (ctx) => {
+    ctx.reply(`Last checked: ${lastCheck.toUTCString()}`);
+    ctx.replyWithPhoto({ source: fs.createReadStream('capture.png') });
+});
+bot.command('checkstat', (ctx) => {
+    ctx.reply(`Total checked: ${totalChecks}`);
+});
+bot.hears('scalpers', (ctx) => ctx.reply('Fuck scalpers'));
 bot.launch();
 
 interval(async () => {
@@ -67,9 +77,13 @@ interval(async () => {
     // Checking the selectors before we sent stock information
     const checkValue = await (await page.$(checkSelectors[0])).evaluate((node) => node.innerText);
 
+    lastCheck = new Date();
+    totalChecks = totalChecks + 1;
+
+    await page.screenshot({ path: 'capture.png' });
+
     if (checkValue !== ignoreValues[0]) {
         logger.info(`Something has changed, element went away or changed. Value: ${checkValue}`);
-        await page.screenshot({ path: 'capture.png' });
 
         // Send mass notification & screenshot
         const users = db.get('users').value();
