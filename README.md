@@ -1,4 +1,7 @@
-# nvidia-watcher-bot
+# [Deprecated] nvidia-watcher-bot
+
+Replaced by: https://github.com/r1cebank/sentrybot this repo is for reference only
+
 Nvidia store stock watcher bot
 
 # Running
